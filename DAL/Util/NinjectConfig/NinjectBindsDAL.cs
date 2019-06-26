@@ -12,11 +12,12 @@ namespace DAL.Util.NinjectConfig
     {
         public override void Load()
         {
-            Bind<DataBaseContext>().ToSelf().InSingletonScope();
+            Bind<DataBaseContext>().ToSelf();
             Bind<IGenericRepos<Room>>().To<RoomRepos>();
             Bind<IGenericRepos<Event>>().To<EventRepos>();
             Bind<IGenericRepos<Order>>().To<OrderRepos>();
             Bind<IGenericRepos<Client>>().To<ClientRepos>();
+            Bind<IAuthRepos>().To<AuthRepos>();
         }
     }
 }

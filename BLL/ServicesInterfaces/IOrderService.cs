@@ -4,8 +4,8 @@ using System.Text;
 using BLL.DataTransferObjects;
 namespace BLL.ServicesInterfaces
 {
-    interface IOrderService
-    {
+     public interface IOrderService
+     {
         void CreateOrder(string orderName, DateTime arrival, DateTime departure, IEnumerable<ClientDTO> clients, RoomDTO room);
         OrderDTO GetOrder(int id);
         OrderDTO GetOrder(string name);

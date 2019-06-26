@@ -17,7 +17,7 @@ namespace Check2CORE.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(new string[] { "value1", "value2" });
+            return Ok(new string[] { "value1", "value2" }); 
         }
 
         // GET api/values/5

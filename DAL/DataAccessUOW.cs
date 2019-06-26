@@ -19,7 +19,7 @@ namespace DAL
         private IGenericRepos<Order> _orderRepos;
         private IGenericRepos<Client> _clientRepos;
         private IGenericRepos<Room> _roomRepos;
-
+        private IAuthRepos _authRepos;
         public DataAccessUOW()
         {
             DepencyResolver.SeUp(new NinjectBindsDAL());
@@ -63,9 +63,20 @@ namespace DAL
             }
         }
 
-        public void Save()
+        public IAuthRepos AuthRepos
         {
-            DataBase.SaveChanges();
+            get
+            {
+                if (_authRepos == null)
+                    _authRepos = DepencyResolver.Get<IAuthRepos>();
+                return _authRepos;
+            }
+            
+        }
+
+        public async void  SaveAsync()
+        {
+            await DataBase.SaveChangesAsync();
         }
 
 

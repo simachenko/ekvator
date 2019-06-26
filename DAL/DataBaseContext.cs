@@ -9,6 +9,7 @@ namespace DAL
         public DbSet<Event> Events { set; get; }
         public DbSet<Order> Orders { set; get; }
         public DbSet<Client> Clients { set; get; }
+        public DbSet<User> Users { set; get; }
 
         protected DataBaseContext()
         {

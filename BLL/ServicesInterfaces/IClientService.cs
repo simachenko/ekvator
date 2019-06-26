@@ -6,6 +6,6 @@ namespace BLL.ServicesInterfaces
 {
     interface IClientService
     {
-        void CreateClient()
+        void CreateClient();
     }
 }
