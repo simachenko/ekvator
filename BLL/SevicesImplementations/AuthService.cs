@@ -12,9 +12,13 @@ namespace BLL.SevicesImplementations
 {
     class AuthService : IAuthService
     {
-        DataAccessUOW context;
-        public AuthService()
+        
+        private DataAccessUOW context;
+        private IMapper mapper;
+        public AuthService(DataAccessUOW Context, IMapper mapper)
         {
+            this.context = Context;
+            this.mapper = mapper;
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -40,38 +44,31 @@ namespace BLL.SevicesImplementations
             }
         }
 
-        public async Task<UserDTO> RegisterAsync(string userName, string password)
+        public async Task<UserDTO> RegisterAsync(UserForAuthDTO user)
         {
-            userName = userName.ToLower();
-            if (await context.AuthRepos.UserExistsAsync(userName))
+            user.Name = user.Name.ToLower();
+            if (await context.AuthRepos.UserExistsAsync(user.Name))
                 throw new UserAlreadyExistException();
 
             byte[] passwordHash,
                     passwordSalt;
 
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            CreatePasswordHash(user.Password, out passwordHash, out passwordSalt);
 
-            UserDTO user = new UserDTO();
-            user.Name = userName;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDTO,User>()).CreateMapper();
-            bool res = await context.AuthRepos.CreateAsync(mapper.Map<UserDTO, User>(user));
-            if (!res)
-                return null;
-            return user;
+            UserDTO registr = new UserDTO(user.Name,passwordHash,passwordSalt,0);
+           
+            await context.AuthRepos.CreateAsync(mapper.Map<UserDTO, User>(registr));
+            return registr;
         }
 
-        public async Task<UserDTO> LoginAsync(string userName, string password)
+        public async Task<UserDTO> LoginAsync(UserForAuthDTO user)
         {
-            User user = await context.AuthRepos.GetAsync(userName);
+            User userGet = await context.AuthRepos.GetAsync(user.Name);
             if (user == null)
-                return null;
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()).CreateMapper();
-            return mapper.Map<User, UserDTO>(user);
+                throw new UserNoExistException();
+            if (!VerifyPasswordHash(user.Password, userGet.PasswordHash, userGet.PasswordSalt))
+                throw new WrongPasswordException();
+            return mapper.Map<User, UserDTO>(userGet);
         }
 
     

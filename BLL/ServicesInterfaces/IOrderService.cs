@@ -2,16 +2,27 @@
 using System.Collections.Generic;
 using System.Text;
 using BLL.DataTransferObjects;
+using System.Threading.Tasks;
 namespace BLL.ServicesInterfaces
 {
      interface IOrderService
      {
-        void CreateOrder(string orderName, DateTime arrival, DateTime departure, IEnumerable<ClientDTO> clients, RoomDTO room);
+        Task CreateOrderAsync(OrderCreationDTO order);
+        //Task<OrderDTO> GetOrderAsync(int id);
+        //Task<OrderDTO> GetOrderAsync(string name);
+        //Task<OrderDTO> GetOrderByArrivalAsync(DateTime arrival);
+        //Task<OrderDTO> GetOrderByDepartureAsync(DateTime departure);
+        //Task<OrderDTO> GetOrderByRoomIdAsync(int id);
+        //Task<OrderDTO> GetOrderByPriceAsync(int price);
+        void UpdateOrder(OrderDTO order);
+        void RemoveOrder(int id);
+        void CreateOrder(OrderCreationDTO order);
         OrderDTO GetOrder(int id);
-        OrderDTO GetOrder(string name);
-        OrderDTO GetOrderByArrival(DateTime arrival);
-        OrderDTO GetOrderByDeparture(DateTime departure);
-        void UpdateOrder(string orderName, DateTime arrival, DateTime departure, IEnumerable<ClientDTO> clients, RoomDTO room);
-        void DeleteOrder(int id);
+        IEnumerable<OrderDTO> GetOrder(string name);
+        IEnumerable<OrderDTO> GetOrderByArrival(DateTime arrival);
+        IEnumerable<OrderDTO> GetOrderByDeparture(DateTime departure);
+        IEnumerable<OrderDTO> GetOrderByRoomId(int id);
+        IEnumerable<OrderDTO> GetOrderByPrice(int price);
+        
     }
 }

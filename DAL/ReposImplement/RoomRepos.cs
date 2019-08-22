@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.IRepos;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +20,13 @@ namespace DAL.ReposImplement
         }
         public void Create(Room item)
         {
-            DataBase.Rooms.Add(item);
+            DataBase.Rooms.AddAsync(item);
+            
+        }
+
+        public async Task CreateAsync(Room item)
+        {
+            await DataBase.Rooms.AddAsync(item);
         }
 
         public Room Get(int Id)
@@ -31,10 +39,20 @@ namespace DAL.ReposImplement
             return DataBase.Rooms;
         }
 
-        //public ICollection<Room> Get(Func<Room, bool> predicate)
-        //{
-        //    return DataBase.Rooms;
-        //}
+        public IEnumerable<Room> Get(Func<Room, bool> predicate)
+        {
+            return DataBase.Rooms.Where(predicate);
+        }
+
+        public async Task<Room> GetAsync(int Id)
+        {
+            return await DataBase.Rooms.FindAsync(Id);
+        }
+
+        public async Task<IEnumerable<Room>> GetAsync()
+        {
+            return await DataBase.Rooms.ToListAsync();
+        }
 
         public void Remove(Room item)
         {

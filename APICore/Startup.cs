@@ -11,7 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using DAL;
+using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.EntityFrameworkCore;
 namespace Check2CORE
 {
     public class Startup
@@ -26,6 +28,8 @@ namespace Check2CORE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<DataBaseContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+            //   y => y.MigrationsAssembly("DAL")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
             
@@ -47,6 +51,7 @@ namespace Check2CORE
             //app.UseHttpsRedirection();
             app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
+            
             
         }
     }

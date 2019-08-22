@@ -17,7 +17,7 @@ namespace DAL.Models
        
         public ICollection<Client> Clients { set; get; }
 
-        public int FullPrice { set; get; }
+        public double FullPrice { set; get; }
 
         
         public int RoomId { set; get; }

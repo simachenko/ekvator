@@ -5,7 +5,7 @@ using Ninject;
 using Ninject.Modules;
 namespace DAL.Util.Servis_Locator
 {
-    public static class DepencyResolver
+    public static class DependencyResolver
     {
         public static IKernel kernel;
         public static void SeUp(params INinjectModule[] configs)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.IRepos;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,11 @@ namespace DAL.ReposImplement
             DataBase.Orders.Add(item);
         }
 
+        public async Task CreateAsync(Order item)
+        {
+            await DataBase.Orders.AddAsync(item);
+        }
+
         public Order Get(int Id)
         {
             return DataBase.Orders.Find(Id);
@@ -31,6 +38,21 @@ namespace DAL.ReposImplement
         public IEnumerable<Order> Get()
         {
             return DataBase.Orders;
+        }
+
+        public IEnumerable<Order> Get(Func<Order, bool> predicate)
+        {
+            return DataBase.Orders.Where(predicate);
+        }
+
+        public async Task<Order> GetAsync(int Id)
+        {
+            return await DataBase.Orders.FindAsync(Id);
+        }
+
+        public async Task<IEnumerable<Order>> GetAsync()
+        {
+            return await DataBase.Orders.ToListAsync();
         }
 
         public void Remove(Order item)

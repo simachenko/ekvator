@@ -6,9 +6,11 @@ using DAL.IRepos;
 using DAL.Models;
 using Ninject;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
 namespace DAL.ReposImplement
 {
-    public class AuthRepos : IAuthRepos
+    public class AuthRepos : IAuthRepos , IGenericRepos<User>
     {
         [Inject]
         private readonly DataBaseContext DataBase;
@@ -30,11 +32,58 @@ namespace DAL.ReposImplement
             return DataBase.Users.FirstOrDefaultAsync(x => x.Name == userName);
         }
 
-        /*need to clean deprecated code*/
-        public async Task<bool> CreateAsync(User user)
+        /**/
+        public async Task CreateAsync(User user)
         {
-            await DataBase.Users.AddAsync(user);
-            return true; //wtf
+             await DataBase.Users.AddAsync(user);
+              //
+        }
+
+        public User Get(int Id)
+        {
+            return DataBase.Users.Find(Id);
+        }
+
+        public void Create(User item)
+        {
+            DataBase.Users.Add(item);
+        }
+
+        public IEnumerable<User> Get()
+        {
+            return DataBase.Users;
+        }
+
+        public void Remove(User item)
+        {
+            DataBase.Users.Remove(item);
+        }
+
+        public void Remove(int Id)
+        {
+            User item = Get(Id);
+            if (item != null)
+                Remove(item);
+        }
+
+        public void Update(User item)
+        {
+            DataBase.Entry<User>(item).State = EntityState.Modified;
+        }
+
+        public IEnumerable<User> Get(Func<User, bool> predicate)
+        {
+            return DataBase.Users.Where(predicate);
+        }
+
+        public async Task<User> GetAsync(int Id)
+        {
+            return await DataBase.Users.FindAsync(Id);
+        }
+
+        public async Task<IEnumerable<User>> GetAsync()
+        {
+            return await DataBase.Users.ToListAsync();
         }
     }
 }

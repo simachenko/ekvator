@@ -17,6 +17,7 @@ namespace DAL.Util.NinjectConfig
             Bind<IGenericRepos<Event>>().To<EventRepos>();
             Bind<IGenericRepos<Order>>().To<OrderRepos>();
             Bind<IGenericRepos<Client>>().To<ClientRepos>();
+            Bind<IGenericRepos<User>>().To<AuthRepos>();
             Bind<IAuthRepos>().To<AuthRepos>();
         }
     }

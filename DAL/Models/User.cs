@@ -11,5 +11,8 @@ namespace DAL.Models
         public string Name { set; get; }
         public byte[] PasswordHash { set; get; }
         public byte[] PasswordSalt { set; get; }
+
+        public int AccessTypeId { set; get; }
+        public AccessType AccessType { set; get; }
     }
 }

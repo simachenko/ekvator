@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.IRepos;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,11 @@ namespace DAL.ReposImplement
             DataBase.Events.Add(item);
         }
 
+        public async Task CreateAsync(Event item)
+        {
+            await DataBase.Events.AddAsync(item);
+        }
+
         public Event Get(int Id)
         {
             return DataBase.Events.Find(Id);
@@ -30,6 +37,21 @@ namespace DAL.ReposImplement
         public IEnumerable<Event> Get()
         {
             return DataBase.Events;
+        }
+
+        public IEnumerable<Event> Get(Func<Event, bool> predicate)
+        {
+            return DataBase.Events.Where(predicate);
+        }
+
+        public async Task<Event> GetAsync(int Id)
+        {
+            return await DataBase.Events.FindAsync(Id);
+        }
+
+        public async Task<IEnumerable<Event>> GetAsync()
+        {
+            return await DataBase.Events.ToListAsync();
         }
 
         public void Remove(Event item)

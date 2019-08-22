@@ -20,10 +20,11 @@ namespace DAL
         private IGenericRepos<Client> _clientRepos;
         private IGenericRepos<Room> _roomRepos;
         private IAuthRepos _authRepos;
+        private IGenericRepos<User> _userRepos;
         public DataAccessUOW()
         {
-            DepencyResolver.SeUp(new NinjectBindsDAL());
-            DataBase = DepencyResolver.Get<DataBaseContext>();
+            DependencyResolver.SeUp(new NinjectBindsDAL());
+            DataBase = DependencyResolver.Get<DataBaseContext>();
         }
        
         public IGenericRepos<Event> EventRepos
@@ -31,7 +32,7 @@ namespace DAL
             get
             {
                 if (_eventRepos == null)
-                    _eventRepos = DepencyResolver.Get<IGenericRepos<Event>>();
+                    _eventRepos = DependencyResolver.Get<IGenericRepos<Event>>();
                 return _eventRepos;
             }
         }
@@ -40,7 +41,7 @@ namespace DAL
             get
             {
                 if (_orderRepos == null)
-                    _orderRepos = DepencyResolver.Get<IGenericRepos<Order>>();
+                    _orderRepos = DependencyResolver.Get<IGenericRepos<Order>>();
                 return _orderRepos;
             }
         }
@@ -49,7 +50,7 @@ namespace DAL
             get
             {
                 if (_clientRepos == null)
-                    _clientRepos = DepencyResolver.Get<IGenericRepos<Client>>();
+                    _clientRepos = DependencyResolver.Get<IGenericRepos<Client>>();
                 return _clientRepos;
             }
         }
@@ -58,7 +59,7 @@ namespace DAL
             get
             {
                 if (_roomRepos == null)
-                    _roomRepos = DepencyResolver.Get<IGenericRepos<Room>>();
+                    _roomRepos = DependencyResolver.Get<IGenericRepos<Room>>();
                 return _roomRepos;
             }
         }
@@ -68,15 +69,27 @@ namespace DAL
             get
             {
                 if (_authRepos == null)
-                    _authRepos = DepencyResolver.Get<IAuthRepos>();
+                    _authRepos = DependencyResolver.Get<IAuthRepos>();
                 return _authRepos;
             }
             
         }
-
+        public IGenericRepos<User> UserRepos
+        {
+            get
+            {
+                if (_userRepos == null)
+                    _userRepos = DependencyResolver.Get<IGenericRepos<User>>();
+                return _userRepos;
+            }
+        }
         public async void  SaveAsync()
         {
             await DataBase.SaveChangesAsync();
+        }
+        public void Save()
+        {
+             DataBase.SaveChanges();
         }
 
 

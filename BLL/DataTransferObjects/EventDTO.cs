@@ -15,6 +15,6 @@ namespace BLL.DataTransferObjects
 
         
         public int RoomId { set; get; }
-        public RoomDTO Room { set; get; }
+
     }
 }

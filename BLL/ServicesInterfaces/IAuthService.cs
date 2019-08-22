@@ -7,7 +7,8 @@ namespace BLL.ServicesInterfaces
 {
     interface IAuthService
     {
-        Task<UserDTO>  RegisterAsync(string userName, string password);
-        Task<UserDTO> LoginAsync(string userName, string password);
+        Task<UserDTO>  RegisterAsync(UserForAuthDTO user);
+        Task<UserDTO> LoginAsync(UserForAuthDTO user);
+
     }
 }

@@ -4,7 +4,9 @@ using System.Text;
 using DAL.IRepos;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using Ninject;
+using System.Linq;
 
 namespace DAL.ReposImplement
 {
@@ -20,7 +22,13 @@ namespace DAL.ReposImplement
 
         public void Create(Client item)
         {
-            DataBase.Clients.Add(item);
+             DataBase.Clients.Add(item);
+            
+        }
+
+        public async Task CreateAsync(Client item)
+        {
+            await DataBase.Clients.AddAsync(item);
         }
 
         public Client Get(int Id)
@@ -31,6 +39,21 @@ namespace DAL.ReposImplement
         public IEnumerable<Client> Get()
         {
             return DataBase.Clients;
+        }
+
+        public IEnumerable<Client> Get(Func<Client,bool> predicate)
+        {
+            return DataBase.Clients.Where(predicate);
+        }
+
+        public async Task<Client> GetAsync(int Id)
+        {
+            return await DataBase.Clients.FindAsync(Id);
+        }
+
+        public async Task<IEnumerable<Client>> GetAsync()
+        {
+            return await DataBase.Clients.ToListAsync();
         }
 
         public void Remove(Client item)
