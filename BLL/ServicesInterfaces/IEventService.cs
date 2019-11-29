@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BLL.DataTransferObjects;
 namespace BLL.ServicesInterfaces
 {
-    interface IEventService
+    public interface IEventService
     {
         Task CreateEventAsync(EventCreationDTO eventCreation);
        

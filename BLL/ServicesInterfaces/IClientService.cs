@@ -5,7 +5,7 @@ using BLL.DataTransferObjects;
 using System.Threading.Tasks;
 namespace BLL.ServicesInterfaces
 {
-    interface IClientService
+    public interface IClientService
     {
         Task CreateClientAsync(ClientDTO client);
         void CreateClient(ClientDTO client);

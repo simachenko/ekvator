@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLL.DataTransferObjects
 {
-    class ClientDTO
+    public class ClientDTO
     {
         public ClientDTO(double price, int orderId)
         {

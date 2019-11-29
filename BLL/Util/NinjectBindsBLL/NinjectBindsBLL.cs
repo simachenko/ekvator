@@ -4,8 +4,9 @@ using System.Text;
 using Ninject.Modules;
 using AutoMapper;
 using BLL.Util.AutoMapper;
+using BLL.ServicesInterfaces;
+using BLL.SevicesImplementations;
 using AutoMapper.Configuration;
-using AutoMapper;
 namespace BLL.Util.NinjectBindsBLL
 {
     class NinjectBindsBLL : NinjectModule
@@ -16,6 +17,12 @@ namespace BLL.Util.NinjectBindsBLL
             Bind<IConfigurationProvider>().To<MapperConfiguration>();
             Bind<IMapper>().To<Mapper>();
             Bind<DAL.DataAccessUOW>().ToSelf();
+            Bind<IAccessRightsProvider>().To<AccessRightsProvider>();
+            Bind<IClientService>().To<ClientSevice>();
+            Bind<IDateTimeValidation>().To<DateTimeValidator>();
+            Bind<IEventService>().To<EventService>();
+            Bind<IOrderService>().To<OrderSevice>();
+            Bind<IRoomService>().To<RoomService>();
         }
     }
 }

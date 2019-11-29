@@ -26,20 +26,19 @@ namespace BLL.Util.AutoMapper
             CreateMap<Room, RoomDTO>();
             CreateMap<UserDTO, User>();
             CreateMap<User, UserDTO>();
-            CreateMap<IEnumerable<Client>, IEnumerable<ClientDTO>>();
-            CreateMap<IEnumerable<ClientDTO>, IEnumerable<Client>>();
-            CreateMap<IEnumerable<Room>, IEnumerable<RoomDTO>>();
-            CreateMap<IEnumerable<RoomDTO>, IEnumerable<Room>>();
-            CreateMap<IEnumerable<Event>, IEnumerable<EventDTO>>();
-            CreateMap<IEnumerable<EventDTO>, IEnumerable<Event>>();
-            CreateMap<IEnumerable<Order>, IEnumerable<OrderDTO>>();
-            CreateMap<IEnumerable<OrderDTO>, IEnumerable<Order>>();
-            CreateMap<IEnumerable<Room>, IEnumerable<RoomDTO>>();
-            CreateMap<IEnumerable<RoomDTO>, IEnumerable<Room>>();
-            CreateMap<IEnumerable<User>, IEnumerable<UserDTO>>();
-            CreateMap<IEnumerable<UserDTO>, IEnumerable<User>>();
-            CreateMap<IEnumerable<AccessType>, IEnumerable<AccessTypeDTO>>();
-            CreateMap<IEnumerable<AccessTypeDTO>, IEnumerable<AccessType>>();
+            //CreateMap<IEnumerable<Client>, IEnumerable<ClientDTO>>();
+            //CreateMap<IEnumerable<ClientDTO>, IEnumerable<Client>>();
+            ////CreateMap<IEnumerable<Room>, IEnumerable<RoomDTO>>();
+            ////CreateMap<IEnumerable<RoomDTO>, IEnumerable<Room>>();
+            //CreateMap<IEnumerable<Event>, IEnumerable<EventDTO>>();
+            //CreateMap<IEnumerable<EventDTO>, IEnumerable<Event>>();
+            //CreateMap<IEnumerable<Order>, IEnumerable<OrderDTO>>();
+            //CreateMap<IEnumerable<OrderCreationDTO>, IEnumerable<OrderDateValidationDTO>>();
+            //CreateMap<IEnumerable<OrderDTO>, IEnumerable<Order>>();
+            //CreateMap<IEnumerable<User>, IEnumerable<UserDTO>>();
+            //CreateMap<IEnumerable<UserDTO>, IEnumerable<User>>();
+            //CreateMap<IEnumerable<AccessType>, IEnumerable<AccessTypeDTO>>();
+            //CreateMap<IEnumerable<AccessTypeDTO>, IEnumerable<AccessType>>();
         }
     }
 }

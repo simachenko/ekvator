@@ -20,8 +20,8 @@ namespace DAL.ReposImplement
         }
         public void Create(Room item)
         {
-            DataBase.Rooms.AddAsync(item);
-            
+            DataBase.Rooms.Add(item);
+            DataBase.SaveChanges();
         }
 
         public async Task CreateAsync(Room item)

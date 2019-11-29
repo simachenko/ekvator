@@ -9,14 +9,60 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20190813192604_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20191128215022_Initials")]
+    partial class Initials
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+
+            modelBuilder.Entity("DAL.Models.AccessType", b =>
+                {
+                    b.Property<int>("AccesTypeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AccessTypeR");
+
+                    b.Property<bool>("AccessTypeW");
+
+                    b.Property<bool>("AccessTypeX");
+
+                    b.Property<bool>("AccountR");
+
+                    b.Property<bool>("AccountW");
+
+                    b.Property<bool>("AccountX");
+
+                    b.Property<bool>("ClientR");
+
+                    b.Property<bool>("ClientW");
+
+                    b.Property<bool>("ClientX");
+
+                    b.Property<bool>("EventR");
+
+                    b.Property<bool>("EventW");
+
+                    b.Property<bool>("EventX");
+
+                    b.Property<bool>("OrderR");
+
+                    b.Property<bool>("OrderW");
+
+                    b.Property<bool>("OrderX");
+
+                    b.Property<bool>("RoomR");
+
+                    b.Property<bool>("RoomW");
+
+                    b.Property<bool>("RoomX");
+
+                    b.HasKey("AccesTypeId");
+
+                    b.ToTable("AccessTypes");
+                });
 
             modelBuilder.Entity("DAL.Models.Client", b =>
                 {
@@ -65,7 +111,7 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("Departure");
 
-                    b.Property<int>("FullPrice");
+                    b.Property<double>("FullPrice");
 
                     b.Property<string>("Name");
 
@@ -101,6 +147,8 @@ namespace DAL.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AccessTypeId");
+
                     b.Property<string>("Name");
 
                     b.Property<byte[]>("PasswordHash");
@@ -108,6 +156,8 @@ namespace DAL.Migrations
                     b.Property<byte[]>("PasswordSalt");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("AccessTypeId");
 
                     b.ToTable("Users");
                 });
@@ -133,6 +183,14 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Models.Room", "Room")
                         .WithMany("Orders")
                         .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DAL.Models.User", b =>
+                {
+                    b.HasOne("DAL.Models.AccessType", "AccessType")
+                        .WithMany()
+                        .HasForeignKey("AccessTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

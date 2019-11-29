@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using BLL.DataTransferObjects;
 namespace BLL.ServicesInterfaces
 {
-    interface IAuthService
+    public interface IAuthService
     {
-        Task<UserDTO>  RegisterAsync(UserForAuthDTO user);
-        Task<UserDTO> LoginAsync(UserForAuthDTO user);
+        UserDTO  Register(UserForAuthDTO user);
+        UserDTO Login(UserForAuthDTO user);
 
     }
 }

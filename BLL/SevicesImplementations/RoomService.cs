@@ -25,6 +25,7 @@ namespace BLL.SevicesImplementations
         public void CreateRoom(RoomCreationDTO room)
         {
             DataAccessLayer.RoomRepos.Create(mapper.Map<Room>(room));
+            DataAccessLayer.Save();
         }
 
         public async Task CreateRoomAsync(RoomCreationDTO room)
@@ -34,7 +35,8 @@ namespace BLL.SevicesImplementations
 
         public IEnumerable<RoomDTO> GetRoomAtFloor(int floor)
         {
-            return mapper.Map<IEnumerable<RoomDTO>>(DataAccessLayer.RoomRepos.Get(r=>r.Floor==floor));
+            IEnumerable<Room> rm = new List<Room>(DataAccessLayer.RoomRepos.Get(r => r.Floor == floor));
+            return mapper.Map<IEnumerable<Room> , IEnumerable<RoomDTO>>(rm);
         }
 
         public IEnumerable<RoomDTO> GetRoomByEndExpl(DateTime end)

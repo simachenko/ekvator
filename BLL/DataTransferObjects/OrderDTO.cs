@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLL.DataTransferObjects
 {
-    class OrderDTO
+    public class OrderDTO
     {
         public OrderDTO(string name, DateTime arrival, DateTime departure, int roomId)
         {
@@ -20,12 +20,7 @@ namespace BLL.DataTransferObjects
         public string Name { set; get; }
         public DateTime Arrival { set; get; }
         public DateTime Departure { set; get; }
-
-
-
-
         public double FullPrice { set; get; }
-
 
         public int RoomId { set; get; }
 

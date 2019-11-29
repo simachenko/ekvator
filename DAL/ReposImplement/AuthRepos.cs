@@ -26,12 +26,20 @@ namespace DAL.ReposImplement
                 return true;
             return false;
         }
-
+        public bool UserExists(string userName)
+        {
+            if (DataBase.Users.Any(x => x.Name == userName))
+                return true;
+            return false;
+        }
         public Task<User> GetAsync(string userName)
         {
             return DataBase.Users.FirstOrDefaultAsync(x => x.Name == userName);
         }
-
+        public User Get(string userName)
+        {
+            return DataBase.Users.FirstOrDefault(x => x.Name == userName);
+        }
         /**/
         public async Task CreateAsync(User user)
         {

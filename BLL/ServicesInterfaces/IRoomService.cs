@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BLL.DataTransferObjects;
 namespace BLL.ServicesInterfaces
 {
-    interface IRoomService
+    public interface IRoomService
     {
         Task CreateRoomAsync(RoomCreationDTO room);
         void RemoveRoom(int id);

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLL.DataTransferObjects
 {
-    class EventCreationDTO
+    public class EventCreationDTO
     {
         public EventCreationDTO(string description, int price, DateTime start, DateTime end, int roomId)
         {

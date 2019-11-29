@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.DataTransferObjects;
 namespace BLL.ServicesInterfaces
 {
-    interface IDateTimeValidation<T>
+    public interface IDateTimeValidation
     {
-        Task<bool> DateTimeValidationAsync(T item);
-        Task<IEnumerable<T>> GetDateTimeOverlayAsync(T item);
-        bool DateTimeValidation(T item);
-        IEnumerable<T> GetDateTimeOverlay(T item);
+        Task<bool> DateTimeValidationAsync(OrderCreationDTO item);
+        Task<IEnumerable<OrderCreationDTO>> GetDateTimeOverlayAsync(OrderCreationDTO item);
+        bool DateTimeValidation(OrderCreationDTO item);
+        IEnumerable<OrderCreationDTO> GetDateTimeOverlay(OrderCreationDTO item);
 
     }
 }

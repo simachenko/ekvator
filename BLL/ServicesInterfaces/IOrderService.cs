@@ -5,7 +5,7 @@ using BLL.DataTransferObjects;
 using System.Threading.Tasks;
 namespace BLL.ServicesInterfaces
 {
-     interface IOrderService
+     public interface IOrderService
      {
         Task CreateOrderAsync(OrderCreationDTO order);
         //Task<OrderDTO> GetOrderAsync(int id);

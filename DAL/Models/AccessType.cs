@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace DAL.Models
 {
     public class AccessType
     {
+        [Key]
         public int AccesTypeId { set; get; }
 
         public bool AccountR { set; get; }

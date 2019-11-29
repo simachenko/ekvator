@@ -44,10 +44,10 @@ namespace BLL.SevicesImplementations
             }
         }
 
-        public async Task<UserDTO> RegisterAsync(UserForAuthDTO user)
+        public UserDTO Register(UserForAuthDTO user)
         {
             user.Name = user.Name.ToLower();
-            if (await context.AuthRepos.UserExistsAsync(user.Name))
+            if (context.AuthRepos.UserExists(user.Name))
                 throw new UserAlreadyExistException();
 
             byte[] passwordHash,
@@ -57,13 +57,13 @@ namespace BLL.SevicesImplementations
 
             UserDTO registr = new UserDTO(user.Name,passwordHash,passwordSalt,0);
            
-            await context.AuthRepos.CreateAsync(mapper.Map<UserDTO, User>(registr));
+            context.AuthRepos.Create(mapper.Map<UserDTO, User>(registr));
             return registr;
         }
 
-        public async Task<UserDTO> LoginAsync(UserForAuthDTO user)
+        public UserDTO Login(UserForAuthDTO user)
         {
-            User userGet = await context.AuthRepos.GetAsync(user.Name);
+            User userGet = context.AuthRepos.Get(user.Name);
             if (user == null)
                 throw new UserNoExistException();
             if (!VerifyPasswordHash(user.Password, userGet.PasswordHash, userGet.PasswordSalt))

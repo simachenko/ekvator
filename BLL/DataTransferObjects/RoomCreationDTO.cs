@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLL.DataTransferObjects
 {
-    class RoomCreationDTO
+    public class RoomCreationDTO
     {
         public RoomCreationDTO(int number, int floor, DateTime startExpluatation, DateTime endExpluatation)
         {

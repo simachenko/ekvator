@@ -6,7 +6,7 @@ using BLL.DataTransferObjects;
 
 namespace BLL.ServicesInterfaces
 {
-    interface IAccessRightsProvider
+    public interface IAccessRightsProvider
     {
         Task UserRightResolveAsync(UserDTO user);
         Task<AccessTypeDTO> GetAccessTypeAsync(UserDTO user);

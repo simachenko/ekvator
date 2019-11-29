@@ -4,19 +4,15 @@ using System.Text;
 
 namespace BLL.DataTransferObjects
 {
-    public class OrderCreationDTO
+    public class OrderDateValidationDTO
     {
-        public OrderCreationDTO(string name, DateTime arrival, DateTime departure, int roomId)
+        public OrderDateValidationDTO( DateTime arrival, DateTime departure)
         {
-            Name = name;
             Arrival = arrival;
             Departure = departure;
-            RoomId = roomId;
-        }
 
-        public string Name { set; get; }
+        }
         public DateTime Arrival { set; get; }
         public DateTime Departure { set; get; }
-        public int RoomId { set; get; }
     }
 }

@@ -14,6 +14,8 @@ using Microsoft.Extensions.Options;
 using DAL;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 namespace Check2CORE
 {
     public class Startup
@@ -46,11 +48,12 @@ namespace Check2CORE
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                // app.UseHsts();
-            }
-
-            //app.UseHttpsRedirection();
+            };
+            app.UseHttpsRedirection();
             app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseMvc();
+            app.UseMvc(routes=> {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
             
             
         }
