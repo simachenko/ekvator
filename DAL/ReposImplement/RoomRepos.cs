@@ -27,6 +27,7 @@ namespace DAL.ReposImplement
         public async Task CreateAsync(Room item)
         {
             await DataBase.Rooms.AddAsync(item);
+            await DataBase.SaveChangesAsync();
         }
 
         public Room Get(int Id)
@@ -57,17 +58,23 @@ namespace DAL.ReposImplement
         public void Remove(Room item)
         {
             DataBase.Rooms.Remove(item);
+            DataBase.SaveChanges();
         }
 
         public void Remove(int Id)
         {
             Room item = Get(Id);
-            if (item != null)        
+            if (item != null)
+            {
                 Remove(item);
+                DataBase.SaveChanges();
+            }
+
         }
         public void Update(Room item)
         {
             DataBase.Entry<Room>(item).State = EntityState.Modified;
+            DataBase.SaveChanges();
         }
     }
 }

@@ -23,12 +23,13 @@ namespace DAL.ReposImplement
         public void Create(AccessType item)
         {
             DataBase.AccessTypes.Add(item);
+            DataBase.SaveChanges();
         }
 
         public async Task CreateAsync(AccessType item)
         {
             await DataBase.AccessTypes.AddAsync(item);
-                         
+            await DataBase.SaveChangesAsync();
         }
 
         public AccessType Get(int Id)
@@ -64,13 +65,18 @@ namespace DAL.ReposImplement
         public void Remove(AccessType item)
         {
             DataBase.AccessTypes.Remove(item);
+            DataBase.SaveChanges();
         }
 
         public void Remove(int Id)
         {
             AccessType type = Get(Id);
             if (type != null)
+            {
                 DataBase.AccessTypes.Remove(type);
+                DataBase.SaveChanges();
+            }
+            
         }
 
         //public async Task<bool> RemoveAsync(AccessType item)
@@ -86,6 +92,7 @@ namespace DAL.ReposImplement
         public void Update(AccessType item)
         {
             DataBase.Entry<AccessType>(item).State = EntityState.Modified;
+            DataBase.SaveChanges();
         }
 
         //public Task<bool> UpdateAsync(AccessType item)

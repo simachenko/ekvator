@@ -22,13 +22,15 @@ namespace DAL.ReposImplement
 
         public void Create(Client item)
         {
-             DataBase.Clients.Add(item);
-            
+            DataBase.Clients.Add(item);
+            DataBase.SaveChanges();
+
         }
 
         public async Task CreateAsync(Client item)
         {
             await DataBase.Clients.AddAsync(item);
+            await DataBase.SaveChangesAsync();
         }
 
         public Client Get(int Id)
@@ -59,18 +61,24 @@ namespace DAL.ReposImplement
         public void Remove(Client item)
         {
             DataBase.Clients.Remove(item);
+            DataBase.SaveChanges();
+
         }
 
         public void Remove(int Id)
         {
             Client item = Get(Id);
             if (item != null)
+            {
                 Remove(item);
+                DataBase.SaveChanges();
+            }
         }
 
         public void Update(Client item)
         {
             DataBase.Entry<Client>(item).State = EntityState.Modified;
+            DataBase.SaveChanges();
         }
     }
 }

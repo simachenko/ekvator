@@ -44,7 +44,7 @@ namespace DAL.ReposImplement
         public async Task CreateAsync(User user)
         {
              await DataBase.Users.AddAsync(user);
-              //
+             await DataBase.SaveChangesAsync();
         }
 
         public User Get(int Id)
@@ -55,6 +55,7 @@ namespace DAL.ReposImplement
         public void Create(User item)
         {
             DataBase.Users.Add(item);
+            DataBase.SaveChanges();
         }
 
         public IEnumerable<User> Get()
@@ -65,18 +66,25 @@ namespace DAL.ReposImplement
         public void Remove(User item)
         {
             DataBase.Users.Remove(item);
+            DataBase.SaveChanges();
+
         }
 
         public void Remove(int Id)
         {
             User item = Get(Id);
             if (item != null)
+            {
                 Remove(item);
+                DataBase.SaveChanges();
+            }
         }
 
         public void Update(User item)
         {
             DataBase.Entry<User>(item).State = EntityState.Modified;
+            DataBase.SaveChanges();
+
         }
 
         public IEnumerable<User> Get(Func<User, bool> predicate)

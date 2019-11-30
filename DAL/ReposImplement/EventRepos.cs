@@ -22,11 +22,13 @@ namespace DAL.ReposImplement
         public void Create(Event item)
         {
             DataBase.Events.Add(item);
+            DataBase.SaveChanges();
         }
 
         public async Task CreateAsync(Event item)
         {
             await DataBase.Events.AddAsync(item);
+            await DataBase.SaveChangesAsync();
         }
 
         public Event Get(int Id)
@@ -57,19 +59,23 @@ namespace DAL.ReposImplement
         public void Remove(Event item)
         {
             DataBase.Events.Remove(item);
+            DataBase.SaveChanges();
         }
 
         public void Remove(int Id)
         {
            Event item = Get(Id);
             if (item != null)
+            {
                 Remove(item);
+                DataBase.SaveChanges();
+            }
         }
 
         public void Update(Event item)
         {
             DataBase.Entry<Event>(item).State = EntityState.Modified;
-
+            DataBase.SaveChanges();
         }
     }
 }

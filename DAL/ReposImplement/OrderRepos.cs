@@ -23,11 +23,13 @@ namespace DAL.ReposImplement
         public void Create(Order item)
         {
             DataBase.Orders.Add(item);
+            DataBase.SaveChanges();
         }
 
         public async Task CreateAsync(Order item)
         {
             await DataBase.Orders.AddAsync(item);
+            await DataBase.SaveChangesAsync();
         }
 
         public Order Get(int Id)
@@ -58,19 +60,23 @@ namespace DAL.ReposImplement
         public void Remove(Order item)
         {
             DataBase.Orders.Remove(item);
+            DataBase.SaveChanges();
         }
 
         public void Remove(int Id)
         {
             Order item = Get(Id);
             if (item != null)
+            {
                 Remove(item);
+                DataBase.SaveChanges();
+            }
         }
 
         public void Update(Order item)
         {
             DataBase.Entry<Order>(item).State = EntityState.Modified;
-
+            DataBase.SaveChanges();
         }
     }
 }
