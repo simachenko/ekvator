@@ -27,10 +27,9 @@ namespace BLL.SevicesImplementations
         }
         public void CreateOrder(OrderCreationDTO order)
         {
-            if (!dateTimeValidation.DateTimeValidation(order))
+            if (dateTimeValidation.DateTimeValidation(order))
                 throw new DateIsBusyExeption();
             DataAccessLayer.OrderRepos.Create(mapper.Map<OrderCreationDTO, Order>(order));
-            DataAccessLayer.Save();
 
         }
 
@@ -40,7 +39,6 @@ namespace BLL.SevicesImplementations
                 throw new DateIsBusyExeption();
             else
                 await DataAccessLayer.OrderRepos.CreateAsync(mapper.Map<OrderCreationDTO, Order>(order));
-            DataAccessLayer.Save();
         }
 
         public OrderDTO GetOrder(int id)
@@ -60,15 +58,13 @@ namespace BLL.SevicesImplementations
         public void RemoveOrder(int id)
         {
             DataAccessLayer.OrderRepos.Remove(id);
-            DataAccessLayer.Save();
         }
 
         public void UpdateOrder(OrderDTO order)
         {
-            if (!dateTimeValidation.DateTimeValidation(mapper.Map<OrderDTO, OrderCreationDTO>(order)))
+            if (dateTimeValidation.DateTimeValidation(order))
                 throw new DateIsBusyExeption();
             DataAccessLayer.OrderRepos.Update(mapper.Map<OrderDTO, Order>(order));
-            DataAccessLayer.Save();
         }
 
         private OrderDTO CountFullPrice(OrderDTO order) {
@@ -83,7 +79,6 @@ namespace BLL.SevicesImplementations
                 {
                     order.FullPrice = summ;
                     DataAccessLayer.OrderRepos.Update(mapper.Map<OrderDTO, Order>(order));
-                    DataAccessLayer.Save();
                 }
             }
             return order;

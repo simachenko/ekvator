@@ -25,7 +25,6 @@ namespace BLL.SevicesImplementations
         public void CreateRoom(RoomCreationDTO room)
         {
             DataAccessLayer.RoomRepos.Create(mapper.Map<Room>(room));
-            DataAccessLayer.Save();
         }
 
         public async Task CreateRoomAsync(RoomCreationDTO room)

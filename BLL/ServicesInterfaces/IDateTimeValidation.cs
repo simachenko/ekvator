@@ -10,6 +10,8 @@ namespace BLL.ServicesInterfaces
         Task<bool> DateTimeValidationAsync(OrderCreationDTO item);
         Task<IEnumerable<OrderCreationDTO>> GetDateTimeOverlayAsync(OrderCreationDTO item);
         bool DateTimeValidation(OrderCreationDTO item);
+        bool DateTimeValidation(OrderDTO item);
+
         IEnumerable<OrderCreationDTO> GetDateTimeOverlay(OrderCreationDTO item);
 
     }
